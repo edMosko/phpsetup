@@ -50,7 +50,7 @@ for php in phpfiles:
             if (linea[(len(linea)-2)]==';'):
                 pass
             else:
-                print("Missing semicolon found and added in line "+(i+1)+" of " + php)
+                print("Missing semicolon found and added in line "+str(i+1)+" of " + php)
                 linea[(len(linea)-1)]=';'
                 linea.append('\n')
         else:
