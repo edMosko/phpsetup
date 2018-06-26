@@ -4,11 +4,12 @@ import shutil
 print ("Processing...")
 phporigin = "/home/edmosko/Documents/dev/php"
 patho = phporigin + "/"
-patht = "/var/www/"
+patht = "/var/www/html" + "/"
 
 
 phpfiles=[]
 dirs=['']
+print("Looking for PHP files...")
 for place in dirs:
     for file in os.listdir(phporigin+place):
         try:
@@ -25,6 +26,7 @@ for place in dirs:
 
 
 for php in phpfiles:
+    print("Looking for missing semicolons in " + php)
     document = []
     file = open((phporigin+php),'r', encoding="utf-8")
     isphp = '0'
@@ -48,6 +50,7 @@ for php in phpfiles:
             if (linea[(len(linea)-2)]==';'):
                 pass
             else:
+                print("Missing semicolon found and added in line "+(i+1)+" of " + php)
                 linea[(len(linea)-1)]=';'
                 linea.append('\n')
         else:
@@ -66,7 +69,8 @@ for php in phpfiles:
     file.writelines(document)
     file.close()
 
-
+print("Semicolons are all right now")
+print("Moving your stuff...")
 shutil.rmtree(patht)
-shutil.copytree(patho, (patht+"html"))
+shutil.copytree(patho, (patht))
 print("Success!")
